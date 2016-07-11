@@ -1,4 +1,4 @@
-# Hazelcast RxJava Plugin [![Build Status](https://secure.travis-ci.org/tombujok/hazelcast-rxjava.png)](http://travis-ci.org/tombujok/hazelcast-rxjava)
+# Hazelcast RxJava Plugin [![Build Status](https://secure.travis-ci.org/tombujok/hazelcast-rxjava.png)](http://travis-ci.org/tombujok/hazelcast-rxjava) [![codecov](https://codecov.io/gh/tombujok/hazelcast-rxjava/branch/master/graph/badge.svg)](https://codecov.io/gh/tombujok/hazelcast-rxjava)
 
 ## Using Hazelcast through RxJava
 
