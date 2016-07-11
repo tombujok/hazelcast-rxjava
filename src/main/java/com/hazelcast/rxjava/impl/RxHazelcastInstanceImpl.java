@@ -33,6 +33,11 @@ public final class RxHazelcastInstanceImpl implements RxHazelcastInstance {
     }
 
     @Override
+    public void shutdown() {
+        instance.shutdown();
+    }
+
+    @Override
     public HazelcastInstance getDelegate() {
         return instance;
     }

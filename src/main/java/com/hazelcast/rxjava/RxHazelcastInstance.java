@@ -20,6 +20,8 @@ public interface RxHazelcastInstance {
      */
     <E> RxRingbuffer<E> getRingbuffer(String name);
 
+    void shutdown();
+
     /**
      * @return Returns the underlying non-RxJava object
      */
