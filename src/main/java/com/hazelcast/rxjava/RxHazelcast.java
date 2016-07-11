@@ -13,12 +13,12 @@ import java.util.concurrent.Executor;
 
 public final class RxHazelcast {
 
-    public static RxHazelcastInstance newHazelcastInstance(Config config) {
-        return new RxHazelcastInstanceImpl(Hazelcast.newHazelcastInstance(config));
-    }
-
     public static RxHazelcastInstance newHazelcastInstance() {
         return new RxHazelcastInstanceImpl(Hazelcast.newHazelcastInstance());
+    }
+
+    public static RxHazelcastInstance newHazelcastInstance(Config config) {
+        return new RxHazelcastInstanceImpl(Hazelcast.newHazelcastInstance(config));
     }
 
     public static RxHazelcastInstance newHazelcastInstance(Config config, Executor executor) {

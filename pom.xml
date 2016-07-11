@@ -21,7 +21,7 @@
     <name>hazelcast-rxjava</name>
     <groupId>com.hazelcast</groupId>
     <artifactId>hazelcast-rxjava</artifactId>
-    <version>3.7-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <description>Hazelcast In-Memory DataGrid RxJava Plugin</description>
     <url>http://www.hazelcast.com/</url>

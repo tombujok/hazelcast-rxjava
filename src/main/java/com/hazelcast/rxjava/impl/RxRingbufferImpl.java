@@ -58,4 +58,5 @@ public class RxRingbufferImpl<E> implements RxRingbuffer<E> {
     public static <E> RxRingbuffer<E> from(Ringbuffer<E> ringbuffer, Executor executor) {
         return new RxRingbufferImpl<E>(ringbuffer, executor);
     }
+    
 }
