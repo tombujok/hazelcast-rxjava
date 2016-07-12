@@ -2,7 +2,7 @@
 
 ## Using Hazelcast through RxJava
 
-Hazelcast plugin that enables using Hazelcast over RxJava.
+Hazelcast plugin that enables using Hazelcast over RxJava in a reactive way.
 
 ## Supported Data Structures
 
