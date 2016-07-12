@@ -25,6 +25,9 @@ import com.hazelcast.rxjava.RxRingbuffer;
 
 import java.util.concurrent.Executor;
 
+/**
+ * Reactive version of the {@link HazelcastInstance} - implementation
+ */
 public final class RxHazelcastInstanceImpl implements RxHazelcastInstance {
 
     private final HazelcastInstance instance;

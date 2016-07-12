@@ -24,6 +24,11 @@ import rx.Observable;
 
 import java.util.concurrent.Executor;
 
+/**
+ * Reactive version of the {@link IAtomicReference} - implementation
+ *
+ * @param <E>
+ */
 public final class RxAtomicReferenceImpl<E> implements RxAtomicReference<E> {
 
     private final AsyncAtomicReference<E> atomicReference;

@@ -23,6 +23,11 @@ import rx.Subscriber;
 
 import java.util.concurrent.Executor;
 
+/**
+ * Converts ICompletableFuture to Observable
+ *
+ * @param <T>
+ */
 final class RxIObservable<T> extends Observable<T> {
 
     private RxIObservable(ICompletableFuture<T> completableFuture) {

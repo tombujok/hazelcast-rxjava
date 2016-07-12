@@ -24,6 +24,12 @@ import rx.Observable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Reactive version of the {@link IMap} - implementation
+ *
+ * @param <K>
+ * @param <V>
+ */
 public final class RxIMapImpl<K, V> implements RxIMap<K, V> {
 
     private final IMap<K, V> map;

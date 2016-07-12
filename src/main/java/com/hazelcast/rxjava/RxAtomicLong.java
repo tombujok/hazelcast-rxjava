@@ -21,6 +21,9 @@ import com.hazelcast.core.ICompletableFuture;
 import com.hazelcast.core.IFunction;
 import rx.Observable;
 
+/**
+ * Reactive version of the {@link IAtomicLong}
+ */
 public interface RxAtomicLong {
 
     /**
@@ -30,7 +33,7 @@ public interface RxAtomicLong {
      * callback can be provided for execution upon completion, as demonstrated in the following examples:
      *
      * @param delta the value to add
-     * @return an {@link ICompletableFuture} bearing the response
+     * @return an {@link Observable} bearing the response
      * @since 3.7
      */
     Observable<Long> addAndGet(long delta);
@@ -42,7 +45,7 @@ public interface RxAtomicLong {
      *
      * @param expect the expected value
      * @param update the new value
-     * @return an {@link ICompletableFuture} with value true if successful; or false if the actual value
+     * @return an {@link Observable} with value true if successful; or false if the actual value
      * was not equal to the expected value.
      * @since 3.7
      */
@@ -52,7 +55,7 @@ public interface RxAtomicLong {
      * Atomically decrements the current value by one.
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
-     * @return an {@link ICompletableFuture} with the updated value.
+     * @return an {@link Observable} with the updated value.
      * @since 3.7
      */
     Observable<Long> decrementAndGet();
@@ -70,7 +73,7 @@ public interface RxAtomicLong {
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
      * @param delta the value to add
-     * @return an {@link ICompletableFuture} with the old value before the addition
+     * @return an {@link Observable} with the old value before the addition
      * @since 3.7
      */
     Observable<Long> getAndAdd(long delta);
@@ -80,7 +83,7 @@ public interface RxAtomicLong {
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
      * @param newValue the new value
-     * @return an {@link ICompletableFuture} with the old value
+     * @return an {@link Observable} with the old value
      * @since 3.7
      */
     Observable<Long> getAndSet(long newValue);
@@ -89,7 +92,7 @@ public interface RxAtomicLong {
      * Atomically increments the current value by one.
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
-     * @return an {@link ICompletableFuture} with the updated value
+     * @return an {@link Observable} with the updated value
      * @since 3.7
      */
     Observable<Long> incrementAndGet();
@@ -98,7 +101,7 @@ public interface RxAtomicLong {
      * Atomically increments the current value by one.
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
-     * @return an {@link ICompletableFuture} with the old value
+     * @return an {@link Observable} with the old value
      * @since 3.7
      */
     Observable<Long> getAndIncrement();
@@ -108,7 +111,7 @@ public interface RxAtomicLong {
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
      * @param newValue the new value
-     * @return an {@link ICompletableFuture} API consumers can use to track execution of this request
+     * @return an {@link Observable} API consumers can use to track execution of this request
      * @since 3.7
      */
     Observable<Void> set(long newValue);
@@ -118,7 +121,7 @@ public interface RxAtomicLong {
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
      * @param function the function
-     * @return an {@link ICompletableFuture} API consumers can use to track execution of this request
+     * @return an {@link Observable} API consumers can use to track execution of this request
      * @throws IllegalArgumentException if function is null.
      * @since 3.7
      */
@@ -129,7 +132,7 @@ public interface RxAtomicLong {
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
      * @param function the function
-     * @return an {@link ICompletableFuture} with the new value.
+     * @return an {@link Observable} with the new value.
      * @throws IllegalArgumentException if function is null.
      * @since 3.7
      */
@@ -140,7 +143,7 @@ public interface RxAtomicLong {
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
      * @param function the function
-     * @return an {@link ICompletableFuture} with the old value
+     * @return an {@link Observable} with the old value
      * @throws IllegalArgumentException if function is null.
      * @since 3.7
      */
@@ -151,12 +154,15 @@ public interface RxAtomicLong {
      * This method will dispatch a request and return immediately an {@link ICompletableFuture}.
      *
      * @param function the function
-     * @return an {@link ICompletableFuture} with the result of the function application
+     * @return an {@link Observable} with the result of the function application
      * @throws IllegalArgumentException if function is null.
      * @since 3.7
      */
     <R> Observable<R> apply(IFunction<Long, R> function);
 
+    /**
+     * @return Returns the underlying non-reactive object
+     */
     IAtomicLong getDelegate();
 
 }

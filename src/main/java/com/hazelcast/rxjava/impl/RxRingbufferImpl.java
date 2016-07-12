@@ -27,6 +27,11 @@ import rx.functions.Func1;
 import java.util.Collection;
 import java.util.concurrent.Executor;
 
+/**
+ * Reactive version of the {@link Ringbuffer} - implementation
+ *
+ * @param <E>
+ */
 public final class RxRingbufferImpl<E> implements RxRingbuffer<E> {
 
     private final Ringbuffer<E> ringbuffer;

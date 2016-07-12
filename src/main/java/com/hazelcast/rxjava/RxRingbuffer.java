@@ -23,6 +23,11 @@ import rx.Observable;
 
 import java.util.Collection;
 
+/**
+ * Reactive version of the {@link Ringbuffer}
+ *
+ * @param <E>
+ */
 public interface RxRingbuffer<E> {
 
     /**
@@ -38,22 +43,11 @@ public interface RxRingbuffer<E> {
      * </ol>
      * <p>
      * The reason that FAIL exist is to give the opportunity to obey the ttl. If blocking behavior is required,
-     * this can be implemented using retrying in combination with a exponential backoff. Example:
-     * <code>
-     * long sleepMs = 100;
-     * for (; ; ) {
-     * long result = ringbuffer.addAsync(item, FAIL).get();
-     * if (result != -1) {
-     * break;
-     * }
-     * TimeUnit.MILLISECONDS.sleep(sleepMs);
-     * sleepMs = min(5000, sleepMs * 2);
-     * }
-     * </code>
+     * this can be implemented using retrying in combination with a exponential backoff.
      *
      * @param item           the item to add
      * @param overflowPolicy the OverflowPolicy to use.
-     * @return the sequenceId of the added item, or -1 if the add failed.
+     * @return Observable with the sequenceId of the added item, or -1 if the add failed.
      * @throws NullPointerException if item or overflowPolicy is null.
      */
     Observable<Long> add(E item, OverflowPolicy overflowPolicy);
@@ -81,7 +75,7 @@ public interface RxRingbuffer<E> {
      * The result of the future contains the sequenceId of the last written item
      *
      * @param collection the batch of items to add.
-     * @return the ICompletableFuture to synchronize on completion.
+     * @return Observable with the sequenceId of the last written item
      * @throws java.lang.NullPointerException if batch is null,
      *                                        or if an item in this batch is null
      *                                        or if overflowPolicy is null
@@ -106,7 +100,7 @@ public interface RxRingbuffer<E> {
      * @param minCount      the minimum number of items to read.
      * @param maxCount      the maximum number of items to read.
      * @param filter        the filter. Filter is allowed to be null, indicating there is no filter.
-     * @return a future containing the items read.
+     * @return Observable with a future containing the items read.
      * @throws java.lang.IllegalArgumentException if startSequence is smaller than 0
      *                                            or if startSequence larger than tailSequence()
      *                                            or if minCount smaller than 0
@@ -116,6 +110,9 @@ public interface RxRingbuffer<E> {
      */
     Observable<E> readMany(long startSequence, int minCount, int maxCount, IFunction<E, Boolean> filter);
 
+    /**
+     * @return Returns the underlying non-reactive object
+     */
     Ringbuffer<E> getDelegate();
 
 }

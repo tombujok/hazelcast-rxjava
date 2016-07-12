@@ -20,6 +20,10 @@ import com.hazelcast.core.IAtomicReference;
 import com.hazelcast.core.IFunction;
 import rx.Observable;
 
+/**
+ * Reactive version of the {@link IAtomicReference}
+ * @param <E>
+ */
 public interface RxAtomicReference<E> {
 
     /**
@@ -28,7 +32,7 @@ public interface RxAtomicReference<E> {
      *
      * @param expect the expected value
      * @param update the new value
-     * @return true if successful; or false if the actual value
+     * @return Observable with true if successful; or false if the actual value
      * was not equal to the expected value.
      */
     Observable<Boolean> compareAndSet(E expect, E update);
@@ -36,7 +40,7 @@ public interface RxAtomicReference<E> {
     /**
      * Gets the current value.
      *
-     * @return the current value
+     * @return Observable with the current value
      */
     Observable<E> get();
 
@@ -51,14 +55,14 @@ public interface RxAtomicReference<E> {
      * Gets the value and sets the new value.
      *
      * @param newValue the new value.
-     * @return the old value.
+     * @return Observable with the old value.
      */
     Observable<E> getAndSet(E newValue);
 
     /**
      * Checks if the stored reference is null.
      *
-     * @return true if null, false otherwise.
+     * @return Observable with true if null, false otherwise.
      */
     Observable<Boolean> isNull();
 
@@ -71,7 +75,7 @@ public interface RxAtomicReference<E> {
      * Checks if the reference contains the value.
      *
      * @param value the value to check (is allowed to be null).
-     * @return true if the value is found, false otherwise.
+     * @return Observable with true if the value is found, false otherwise.
      */
     Observable<Boolean> contains(E value);
 
@@ -87,7 +91,7 @@ public interface RxAtomicReference<E> {
      * Alters the currently stored reference by applying a function on it and gets the result.
      *
      * @param function the function
-     * @return the new value.
+     * @return Observable with the new value.
      * @throws IllegalArgumentException if function is null.
      */
     Observable<E> alterAndGet(IFunction<E, E> function);
@@ -96,7 +100,7 @@ public interface RxAtomicReference<E> {
      * Alters the currently stored reference by applying a function on it on and gets the old value.
      *
      * @param function the function
-     * @return the old value
+     * @return Observable with the old value
      * @throws IllegalArgumentException if function is null.
      */
     Observable<E> getAndAlter(IFunction<E, E> function);
@@ -105,10 +109,13 @@ public interface RxAtomicReference<E> {
      * Applies a function on the value, the actual stored value will not change.
      *
      * @param function the function
-     * @return the result of the function application
+     * @return Observable with the result of the function application
      * @throws IllegalArgumentException if function is null.
      */
     <R> Observable<R> apply(IFunction<E, R> function);
 
+    /**
+     * @return Returns the underlying non-reactive object
+     */
     IAtomicReference<E> getDelegate();
 }

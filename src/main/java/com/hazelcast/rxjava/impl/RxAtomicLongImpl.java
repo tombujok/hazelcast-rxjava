@@ -23,6 +23,9 @@ import rx.Observable;
 
 import java.util.concurrent.Executor;
 
+/**
+ * Reactive version of the {@link IAtomicLong} - implementation
+ */
 public final class RxAtomicLongImpl implements RxAtomicLong {
 
     private final IAtomicLong atomicLong;
