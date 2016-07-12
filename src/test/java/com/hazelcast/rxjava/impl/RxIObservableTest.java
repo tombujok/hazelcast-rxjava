@@ -1,7 +1,5 @@
 package com.hazelcast.rxjava.impl;
 
-import com.hazelcast.core.ExecutionCallback;
-import com.hazelcast.core.ICompletableFuture;
 import com.hazelcast.logging.NoLogFactory;
 import com.hazelcast.spi.impl.AbstractCompletableFuture;
 import com.hazelcast.test.HazelcastParallelClassRunner;
