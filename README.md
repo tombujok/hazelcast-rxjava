@@ -10,9 +10,8 @@ Hazelcast plugin that enables using Hazelcast over RxJava in a reactive way.
 - RingBuffer
 - IAtomicLong
 - IAtomicReference
-- ExecutionService (not yet)
 
-RxJava plugin offers support only for data structures that already provide async methods.
+The RxJava plugin offers support only for data structures that already provide async methods.
 
 
 ## How to use it?
@@ -75,6 +74,44 @@ IAtomicLong atomicLong = RxHazelcastInstance.getAtomicLong("long-name");
 # Converting an existing IAtomicReference instance to RxAtomicReference
 RxAtomicLong rxAtomicLong = RxHazelcast.from(atomicLong);
 ```
+
+
+## Example
+
+### Observables flow in Java8
+
+- Fetch task to process from a RingBuffer
+- Fetch two required values simultaneously from two maps based on the task to process
+- Store a result in a RingBuffer
+
+
+```java
+RxIMap<String, Float> rxCurrency = RxHazelcast.from(currency);
+RxIMap<String, Float> rxCommission = RxHazelcast.from(commission);
+RxRingbuffer<Exchange> rxToProcess = RxHazelcast.from(exchange);
+RxRingbuffer<ProcessedExchange> rxProcessed = RxHazelcast.from(processed);
+
+rxToProcess.readMany(0, 1, 10, null)
+        .flatMap(exchange -> {
+            log.info("Processing exchange" + exchange);
+            String fromTo = exchange.from + exchange.to;
+            return Observable.zip(
+                    rxCurrency.get(fromTo),
+                    rxCommission.get(fromTo),
+                    (exchangeRate, commissionPercentage) -> {
+                        Float commission = exchange.amount * commissionPercentage;
+                        Float targetAmount = exchange.amount * exchangeRate;
+                        return new ProcessedExchange(exchange.id, targetAmount, commission);
+                    });
+        })
+        .flatMap(processedExchange -> {
+            log.info("Storing exchange" + processedExchange);
+            return rxProcessed.add(processedExchange, OverflowPolicy.FAIL);
+        }).subscribe(subscriber);
+
+subscriber.awaitTerminalEvent(10, TimeUnit.SECONDS);
+```
+
 
 
 ## Requirements

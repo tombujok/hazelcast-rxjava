@@ -77,4 +77,15 @@ public class RxRingbufferImplTest extends HazelcastTestSupport {
         RxTestUtils.assertMultipleResult(asList("RxJava", "Reactive", "Stuff"), subscriber);
     }
 
+    @Test
+    public void readManyNoFilter() {
+        // WHEN
+        TestSubscriber<String> subscriber = new TestSubscriber<String>();
+        rxring.addAll(asList("Reactive", "Stuff"), OverflowPolicy.FAIL).toBlocking();
+        rxring.readMany(0, 1, 10, null).subscribe(subscriber);
+
+        // THEN
+        RxTestUtils.assertMultipleResult(asList("RxJava", "Reactive", "Stuff"), subscriber);
+    }
+
 }

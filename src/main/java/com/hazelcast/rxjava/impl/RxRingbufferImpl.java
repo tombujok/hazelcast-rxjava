@@ -68,6 +68,11 @@ public final class RxRingbufferImpl<E> implements RxRingbuffer<E> {
                 });
     }
 
+    @Override
+    public Observable<E> readMany(long startSequence, int minCount, int maxCount) {
+        return readMany(startSequence, minCount, maxCount, null);
+    }
+
     public Ringbuffer<E> getDelegate() {
         return ringbuffer;
     }

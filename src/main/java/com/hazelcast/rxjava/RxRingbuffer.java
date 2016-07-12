@@ -99,6 +99,32 @@ public interface RxRingbuffer<E> {
      * @param startSequence the startSequence of the first item to read.
      * @param minCount      the minimum number of items to read.
      * @param maxCount      the maximum number of items to read.
+     * @return Observable with a future containing the items read.
+     * @throws java.lang.IllegalArgumentException if startSequence is smaller than 0
+     *                                            or if startSequence larger than tailSequence()
+     *                                            or if minCount smaller than 0
+     *                                            or if minCount larger than maxCount,
+     *                                            or if maxCount larger than the capacity of the ringbuffer
+     *                                            or if maxCount larger than 1000 (to prevent overload)
+     */
+    Observable<E> readMany(long startSequence, int minCount, int maxCount);
+
+    /**
+     * Reads a batch of items from the Ringbuffer. If the number of available items after the first read item is smaller than
+     * the maxCount, these items are returned. So it could be the number of items read is smaller than the maxCount.
+     * <p>
+     * If there are less items available than minCount, then this call blocks.
+     * <p>
+     * Reading a batch of items is likely to perform better because less overhead is involved.
+     * <p>
+     * A filter can be provided to only select items that need to be read. If the filter is null, all items are read.
+     * If the filter is not null, only items where the filter function returns true are returned. Using filters is a good
+     * way to prevent getting items that are of no value to the receiver. This reduces the amount of IO and the number of
+     * operations being executed, and can result in a significant performance improvement.
+     *
+     * @param startSequence the startSequence of the first item to read.
+     * @param minCount      the minimum number of items to read.
+     * @param maxCount      the maximum number of items to read.
      * @param filter        the filter. Filter is allowed to be null, indicating there is no filter.
      * @return Observable with a future containing the items read.
      * @throws java.lang.IllegalArgumentException if startSequence is smaller than 0
