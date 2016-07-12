@@ -5,8 +5,9 @@ import com.hazelcast.ringbuffer.OverflowPolicy;
 import com.hazelcast.ringbuffer.Ringbuffer;
 import com.hazelcast.rxjava.RxHazelcast;
 import com.hazelcast.rxjava.RxRingbuffer;
-import com.hazelcast.test.HazelcastSerialClassRunner;
+import com.hazelcast.test.HazelcastParallelClassRunner;
 import com.hazelcast.test.HazelcastTestSupport;
+import com.hazelcast.test.annotation.ParallelTest;
 import com.hazelcast.test.annotation.QuickTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,8 +18,8 @@ import rx.observers.TestSubscriber;
 import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 
-@RunWith(HazelcastSerialClassRunner.class)
-@Category({QuickTest.class})
+@RunWith(HazelcastParallelClassRunner.class)
+@Category({QuickTest.class, ParallelTest.class})
 public class RxRingbufferImplTest extends HazelcastTestSupport {
 
     private Ringbuffer<String> ring;

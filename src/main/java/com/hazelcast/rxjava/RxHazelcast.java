@@ -1,7 +1,5 @@
 package com.hazelcast.rxjava;
 
-import com.hazelcast.config.Config;
-import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
 import com.hazelcast.ringbuffer.Ringbuffer;
@@ -12,22 +10,6 @@ import com.hazelcast.rxjava.impl.RxRingbufferImpl;
 import java.util.concurrent.Executor;
 
 public final class RxHazelcast {
-
-    public static RxHazelcastInstance newHazelcastInstance() {
-        return new RxHazelcastInstanceImpl(Hazelcast.newHazelcastInstance());
-    }
-
-    public static RxHazelcastInstance newHazelcastInstance(Config config) {
-        return new RxHazelcastInstanceImpl(Hazelcast.newHazelcastInstance(config));
-    }
-
-    public static RxHazelcastInstance newHazelcastInstance(Config config, Executor executor) {
-        return new RxHazelcastInstanceImpl(Hazelcast.newHazelcastInstance(config), executor);
-    }
-
-    public static RxHazelcastInstance newHazelcastInstance(Executor executor) {
-        return new RxHazelcastInstanceImpl(Hazelcast.newHazelcastInstance(), executor);
-    }
 
     public static RxHazelcastInstance from(HazelcastInstance instance) {
         return RxHazelcastInstanceImpl.from(instance);

@@ -1,17 +1,11 @@
 package com.hazelcast.rxjava.impl;
 
-import com.hazelcast.test.HazelcastSerialClassRunner;
-import com.hazelcast.test.annotation.QuickTest;
-import org.junit.experimental.categories.Category;
-import org.junit.runner.RunWith;
 import rx.observers.TestSubscriber;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(HazelcastSerialClassRunner.class)
-@Category({QuickTest.class})
 public class RxTestUtils {
 
     public static <T> void assertSingleResult(T expected, TestSubscriber<T> subscriber) {
