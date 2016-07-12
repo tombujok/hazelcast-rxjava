@@ -62,30 +62,31 @@ public class RxHazelcastExamples extends HazelcastTestSupport {
         instance.shutdown();
     }
 
-    @Test
-    public void asyncFlowJava8() throws Exception {
-        TestSubscriber subscriber = new TestSubscriber();
-
-        rxToProcess.readMany(0, 1, 100, null)
-                .flatMap(exchange -> {
-                    log.info("Processing exchange" + exchange);
-                    String fromTo = exchange.from + exchange.to;
-                    return Observable.zip(
-                            rxCurrency.get(fromTo),
-                            rxCommission.get(fromTo),
-                            (exchangeRate, commissionPercentage) -> {
-                                Float commission = exchange.amount * commissionPercentage;
-                                Float targetAmount = exchange.amount * exchangeRate;
-                                return new ProcessedExchange(exchange.id, targetAmount, commission);
-                            });
-                })
-                .flatMap(processedExchange -> {
-                    log.info("Storing exchange" + processedExchange);
-                    return rxProcessed.add(processedExchange, OverflowPolicy.FAIL);
-                }).subscribe(subscriber);
-
-        subscriber.awaitTerminalEvent(10, TimeUnit.SECONDS);
-    }
+    // Commented out since JDK set to 1.6
+//    @Test
+//    public void asyncFlowJava8() throws Exception {
+//        TestSubscriber subscriber = new TestSubscriber();
+//
+//        rxToProcess.readMany(0, 1, 100, null)
+//                .flatMap(exchange -> {
+//                    log.info("Processing exchange" + exchange);
+//                    String fromTo = exchange.from + exchange.to;
+//                    return Observable.zip(
+//                            rxCurrency.get(fromTo),
+//                            rxCommission.get(fromTo),
+//                            (exchangeRate, commissionPercentage) -> {
+//                                Float commission = exchange.amount * commissionPercentage;
+//                                Float targetAmount = exchange.amount * exchangeRate;
+//                                return new ProcessedExchange(exchange.id, targetAmount, commission);
+//                            });
+//                })
+//                .flatMap(processedExchange -> {
+//                    log.info("Storing exchange" + processedExchange);
+//                    return rxProcessed.add(processedExchange, OverflowPolicy.FAIL);
+//                }).subscribe(subscriber);
+//
+//        subscriber.awaitTerminalEvent(10, TimeUnit.SECONDS);
+//    }
 
     @Test
     public void asyncFlowJava7() throws Exception {
