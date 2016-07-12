@@ -4,14 +4,20 @@ import com.hazelcast.core.IAtomicReference;
 import com.hazelcast.core.IFunction;
 import com.hazelcast.rxjava.RxAtomicReference;
 import com.hazelcast.rxjava.RxHazelcast;
+import com.hazelcast.test.HazelcastParallelClassRunner;
 import com.hazelcast.test.HazelcastTestSupport;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.hazelcast.test.annotation.ParallelTest;
+import com.hazelcast.test.annotation.QuickTest;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
 import rx.observers.TestSubscriber;
 
 import java.io.Serializable;
 
+@RunWith(HazelcastParallelClassRunner.class)
+@Category({QuickTest.class, ParallelTest.class})
 public class RxAtomicReferenceImplTest extends HazelcastTestSupport implements Serializable {
 
     private transient IAtomicReference<Long> atomicReference;
