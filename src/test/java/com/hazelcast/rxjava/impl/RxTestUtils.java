@@ -16,6 +16,13 @@ public class RxTestUtils {
         assertEquals(expected, subscriber.getOnNextEvents().iterator().next());
     }
 
+    public static <T extends Throwable> void assertFailed(T expected, TestSubscriber<?> subscriber) {
+        subscriber.awaitTerminalEvent();
+        subscriber.assertNotCompleted();
+        subscriber.assertError(expected);
+        subscriber.assertNoValues();
+    }
+
     public static <T> void assertMultipleResult(List<T> expected, TestSubscriber<T> subscriber) {
         subscriber.awaitTerminalEvent();
         subscriber.assertCompleted();

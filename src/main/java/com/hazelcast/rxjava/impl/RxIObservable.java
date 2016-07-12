@@ -34,6 +34,7 @@ final class RxIObservable<T> extends Observable<T> {
     }
 
     private static class RxOnSubscribe<T> implements OnSubscribe<T> {
+
         private final ICompletableFuture<T> completableFuture;
         private final Executor executor;
 
