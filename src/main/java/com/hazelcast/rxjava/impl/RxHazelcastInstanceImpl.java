@@ -1,6 +1,10 @@
 package com.hazelcast.rxjava.impl;
 
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IAtomicLong;
+import com.hazelcast.core.IAtomicReference;
+import com.hazelcast.rxjava.RxAtomicLong;
+import com.hazelcast.rxjava.RxAtomicReference;
 import com.hazelcast.rxjava.RxHazelcastInstance;
 import com.hazelcast.rxjava.RxIMap;
 import com.hazelcast.rxjava.RxRingbuffer;
@@ -33,8 +37,13 @@ public final class RxHazelcastInstanceImpl implements RxHazelcastInstance {
     }
 
     @Override
-    public void shutdown() {
-        instance.shutdown();
+    public RxAtomicLong getAtomicLong(String name) {
+        return RxAtomicLongImpl.from(instance.getAtomicLong(name), executor);
+    }
+
+    @Override
+    public <E> RxAtomicReference<E> getAtomicReference(String name) {
+        return RxAtomicReferenceImpl.from(instance.<E>getAtomicReference(name), executor);
     }
 
     @Override

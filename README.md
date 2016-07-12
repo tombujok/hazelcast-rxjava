@@ -8,14 +8,11 @@ Hazelcast plugin that enables using Hazelcast over RxJava.
 
 - IMap
 - RingBuffer
-
-## Unsupported Data Structures (support on the way)
-
 - IAtomicLong
 - IAtomicReference
-- ExecutionService
+- ExecutionService (not yet)
 
-RxJava plugin offers support only for data structures that provide async methods.
+RxJava plugin offers support only for data structures that already provide async methods.
 
 
 ## How to use it?
@@ -33,7 +30,7 @@ RxHazelcastInstance rxInstance = RxHazelcast.from(instance);
 
 ```java
 # Creating new RxIMap instance
-RxIMap rxIMap = RxHazelcast.getMap("map-name");
+RxIMap rxIMap = RxHazelcastInstance.getMap("map-name");
 ```
 
 ```java
@@ -46,12 +43,37 @@ RxImap rxIMap = RxHazelcast.from(imap);
 
 ```java
 # Creating new Ringbuffer instance
-RxRingbuffer rxRingbuffer = RxHazelcast.getRingbuffer("ringbuffer-name");
+RxRingbuffer rxRingbuffer = RxHazelcastInstance.getRingbuffer("ringbuffer-name");
 ```
 
 ```java
 # Converting an existing Ringbuffer instance to RxRingbuffer
 RxRingbuffer rxRingbuffer = RxHazelcast.from(ringbuffer);
+```
+
+### IAtomicReference
+
+```java
+# Creating new IAtomicReference instance
+IAtomicReference<Long> reference = RxHazelcastInstance.getAtomicReference("reference-name");
+```
+
+```java
+# Converting an existing IAtomicReference instance to RxAtomicReference
+RxAtomicReference rxReference = RxHazelcast.from(reference);
+```
+
+
+### IAtomicLong
+
+```java
+# Creating new IAtomicLong instance
+IAtomicLong atomicLong = RxHazelcastInstance.getAtomicLong("long-name");
+```
+
+```java
+# Converting an existing IAtomicReference instance to RxAtomicReference
+RxAtomicLong rxAtomicLong = RxHazelcast.from(atomicLong);
 ```
 
 
@@ -71,4 +93,4 @@ RxRingbuffer rxRingbuffer = RxHazelcast.from(ringbuffer);
 
 ## Known limitations
 
-The plugin provides suppor only for existing async methods. It does not convert sync methods into RxJava methods.
+The plugin provides support only for existing async methods. It does not convert sync methods into RxJava methods.

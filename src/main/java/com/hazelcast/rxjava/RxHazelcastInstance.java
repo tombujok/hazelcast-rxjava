@@ -1,6 +1,8 @@
 package com.hazelcast.rxjava;
 
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IAtomicLong;
+import com.hazelcast.core.IAtomicReference;
 
 public interface RxHazelcastInstance {
 
@@ -20,7 +22,23 @@ public interface RxHazelcastInstance {
      */
     <E> RxRingbuffer<E> getRingbuffer(String name);
 
-    void shutdown();
+    /**
+     * Creates cluster-wide atomic long. Hazelcast {@link IAtomicLong} is distributed
+     * implementation of <tt>java.util.concurrent.atomic.AtomicLong</tt>.
+     *
+     * @param name name of the {@link IAtomicLong} proxy
+     * @return IAtomicLong proxy for the given name
+     */
+    RxAtomicLong getAtomicLong(String name);
+
+    /**
+     * Creates cluster-wide atomic reference. Hazelcast {@link IAtomicReference} is distributed
+     * implementation of <tt>java.util.concurrent.atomic.AtomicReference</tt>.
+     *
+     * @param name name of the {@link IAtomicReference} proxy
+     * @return {@link IAtomicReference} proxy for the given name
+     */
+    <E> RxAtomicReference<E> getAtomicReference(String name);
 
     /**
      * @return Returns the underlying non-RxJava object
