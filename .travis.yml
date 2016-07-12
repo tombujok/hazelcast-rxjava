@@ -1,6 +1,6 @@
 language: java
 jdk:
   - oraclejdk7
-script: mvn test -Ptest-coverage
+script: mvn test -Ptest-coverage,checkstyle,findbugs
 after_success:
   - bash <(curl -s https://codecov.io/bash)
