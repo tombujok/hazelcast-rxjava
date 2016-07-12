@@ -25,11 +25,6 @@ RxHazelcast object is the entry point for creating new instances or converting e
 ### HazelcastInstance
 
 ```java
-# Creating new RxHazelcastInstance - use the newHazelcastInstance* method family
-RxHazelcastInstance rxInstance = RxHazelcast.newHazelcastInstance();
-```
-
-```java
 # Converting an existing HZ instance to RxHazelcastInstance
 RxHazelcastInstance rxInstance = RxHazelcast.from(instance);
 ```
