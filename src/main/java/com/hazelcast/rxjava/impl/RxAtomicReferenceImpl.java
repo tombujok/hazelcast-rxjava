@@ -51,52 +51,52 @@ public final class RxAtomicReferenceImpl<E> implements RxAtomicReference<E> {
 
     @Override
     public Observable<E> get() {
-        return RxIObservable.from(atomicReference.asyncGet());
+        return RxIObservable.from(atomicReference.asyncGet(), executor);
     }
 
     @Override
     public Observable<Void> set(E newValue) {
-        return RxIObservable.from(atomicReference.asyncSet(newValue));
+        return RxIObservable.from(atomicReference.asyncSet(newValue), executor);
     }
 
     @Override
     public Observable<E> getAndSet(E newValue) {
-        return RxIObservable.from(atomicReference.asyncGetAndSet(newValue));
+        return RxIObservable.from(atomicReference.asyncGetAndSet(newValue), executor);
     }
 
     @Override
     public Observable<Boolean> isNull() {
-        return RxIObservable.from(atomicReference.asyncIsNull());
+        return RxIObservable.from(atomicReference.asyncIsNull(), executor);
     }
 
     @Override
     public Observable<Void> clear() {
-        return RxIObservable.from(atomicReference.asyncClear());
+        return RxIObservable.from(atomicReference.asyncClear(), executor);
     }
 
     @Override
     public Observable<Boolean> contains(E value) {
-        return RxIObservable.from(atomicReference.asyncContains(value));
+        return RxIObservable.from(atomicReference.asyncContains(value), executor);
     }
 
     @Override
     public Observable<Void> alter(IFunction<E, E> function) {
-        return RxIObservable.from(atomicReference.asyncAlter(function));
+        return RxIObservable.from(atomicReference.asyncAlter(function), executor);
     }
 
     @Override
     public Observable<E> alterAndGet(IFunction<E, E> function) {
-        return RxIObservable.from(atomicReference.asyncAlterAndGet(function));
+        return RxIObservable.from(atomicReference.asyncAlterAndGet(function), executor);
     }
 
     @Override
     public Observable<E> getAndAlter(IFunction<E, E> function) {
-        return RxIObservable.from(atomicReference.asyncGetAndAlter(function));
+        return RxIObservable.from(atomicReference.asyncGetAndAlter(function), executor);
     }
 
     @Override
     public <R> Observable<R> apply(IFunction<E, R> function) {
-        return RxIObservable.from(atomicReference.asyncApply(function));
+        return RxIObservable.from(atomicReference.asyncApply(function), executor);
     }
 
     @Override

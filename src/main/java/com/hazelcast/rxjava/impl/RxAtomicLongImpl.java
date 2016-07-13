@@ -43,67 +43,67 @@ public final class RxAtomicLongImpl implements RxAtomicLong {
 
     @Override
     public Observable<Long> addAndGet(long delta) {
-        return RxIObservable.from(atomicLong.addAndGetAsync(delta));
+        return RxIObservable.from(atomicLong.addAndGetAsync(delta), executor);
     }
 
     @Override
     public Observable<Boolean> compareAndSet(long expect, long update) {
-        return RxIObservable.from(atomicLong.compareAndSetAsync(expect, update));
+        return RxIObservable.from(atomicLong.compareAndSetAsync(expect, update), executor);
     }
 
     @Override
     public Observable<Long> decrementAndGet() {
-        return RxIObservable.from(atomicLong.decrementAndGetAsync());
+        return RxIObservable.from(atomicLong.decrementAndGetAsync(), executor);
     }
 
     @Override
     public Observable<Long> get() {
-        return RxIObservable.from(atomicLong.getAsync());
+        return RxIObservable.from(atomicLong.getAsync(), executor);
     }
 
     @Override
     public Observable<Long> getAndAdd(long delta) {
-        return RxIObservable.from(atomicLong.getAndAddAsync(delta));
+        return RxIObservable.from(atomicLong.getAndAddAsync(delta), executor);
     }
 
     @Override
     public Observable<Long> getAndSet(long newValue) {
-        return RxIObservable.from(atomicLong.getAndSetAsync(newValue));
+        return RxIObservable.from(atomicLong.getAndSetAsync(newValue), executor);
     }
 
     @Override
     public Observable<Long> incrementAndGet() {
-        return RxIObservable.from(atomicLong.incrementAndGetAsync());
+        return RxIObservable.from(atomicLong.incrementAndGetAsync(), executor);
     }
 
     @Override
     public Observable<Long> getAndIncrement() {
-        return RxIObservable.from(atomicLong.getAndIncrementAsync());
+        return RxIObservable.from(atomicLong.getAndIncrementAsync(), executor);
     }
 
     @Override
     public Observable<Void> set(long newValue) {
-        return RxIObservable.from(atomicLong.setAsync(newValue));
+        return RxIObservable.from(atomicLong.setAsync(newValue), executor);
     }
 
     @Override
     public Observable<Void> alter(IFunction<Long, Long> function) {
-        return RxIObservable.from(atomicLong.alterAsync(function));
+        return RxIObservable.from(atomicLong.alterAsync(function), executor);
     }
 
     @Override
     public Observable<Long> alterAndGet(IFunction<Long, Long> function) {
-        return RxIObservable.from(atomicLong.alterAndGetAsync(function));
+        return RxIObservable.from(atomicLong.alterAndGetAsync(function), executor);
     }
 
     @Override
     public Observable<Long> getAndAlter(IFunction<Long, Long> function) {
-        return RxIObservable.from(atomicLong.getAndAlterAsync(function));
+        return RxIObservable.from(atomicLong.getAndAlterAsync(function), executor);
     }
 
     @Override
     public <R> Observable<R> apply(IFunction<Long, R> function) {
-        return RxIObservable.from(atomicLong.applyAsync(function));
+        return RxIObservable.from(atomicLong.applyAsync(function), executor);
     }
 
     @Override
