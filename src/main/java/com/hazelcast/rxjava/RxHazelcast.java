@@ -16,16 +16,13 @@
 
 package com.hazelcast.rxjava;
 
+import com.hazelcast.cache.ICache;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IAtomicLong;
 import com.hazelcast.core.IAtomicReference;
 import com.hazelcast.core.IMap;
 import com.hazelcast.ringbuffer.Ringbuffer;
-import com.hazelcast.rxjava.impl.RxAtomicLongImpl;
-import com.hazelcast.rxjava.impl.RxAtomicReferenceImpl;
-import com.hazelcast.rxjava.impl.RxHazelcastInstanceImpl;
-import com.hazelcast.rxjava.impl.RxIMapImpl;
-import com.hazelcast.rxjava.impl.RxRingbufferImpl;
+import com.hazelcast.rxjava.impl.*;
 
 import java.util.concurrent.Executor;
 
@@ -63,7 +60,7 @@ public final class RxHazelcast {
     }
 
     /**
-     * @param map non-rx java object to wrap-around
+     * @param map      non-rx java object to wrap-around
      * @param executor executor to pass to rx-java for callback execution
      * @return a rx-java equivalent of the given input object
      */
@@ -81,7 +78,7 @@ public final class RxHazelcast {
 
     /**
      * @param ringbuffer non-rx java object to wrap-around
-     * @param executor executor to pass to rx-java for callback execution
+     * @param executor   executor to pass to rx-java for callback execution
      * @return a rx-java equivalent of the given input object
      */
     public static <E> RxRingbuffer<E> from(Ringbuffer<E> ringbuffer, Executor executor) {
@@ -98,7 +95,7 @@ public final class RxHazelcast {
 
     /**
      * @param atomicLong non-rx java object to wrap-around
-     * @param executor executor to pass to rx-java for callback execution
+     * @param executor   executor to pass to rx-java for callback execution
      * @return a rx-java equivalent of the given input object
      */
     public static RxAtomicLong from(IAtomicLong atomicLong, Executor executor) {
@@ -115,11 +112,18 @@ public final class RxHazelcast {
 
     /**
      * @param atomicReference non-rx java object to wrap-around
-     * @param executor executor to pass to rx-java for callback execution
+     * @param executor        executor to pass to rx-java for callback execution
      * @return a rx-java equivalent of the given input object
      */
     public static <E> RxAtomicReference<E> from(IAtomicReference<E> atomicReference, Executor executor) {
         return RxAtomicReferenceImpl.from(atomicReference, executor);
     }
 
+    public static RxICache<String, String> from(ICache<String, String> cache) {
+        return RxICacheImpl.from(cache);
+    }
+
+    public static RxICache<String, String> from(ICache<String, String> cache, Executor executor) {
+        return RxICacheImpl.from(cache, executor);
+    }
 }
