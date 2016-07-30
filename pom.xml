@@ -285,6 +285,11 @@
             <artifactId>rxjava-async-util</artifactId>
             <version>0.21.0</version>
         </dependency>
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
     <profiles>
         <profile>
